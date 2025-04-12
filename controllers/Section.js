@@ -19,15 +19,20 @@ exports.createSection = async(req, res) => {
 
         //update course with section ObjectId
 
-        const updateCourseDetails = await Course.findByIdAndUpdate(courseId, {
+        const updateCourse = await Course.findByIdAndUpdate(courseId, {
             $push:{courseContent:newSection._id,}
-        },{new:true},);
+        },{new:true},).populate({
+            path: "courseContent",
+            populate: {
+                path: "subSection",
+            },
+        }).exec();
 
 
         return res.status(200).json({
             success:true,
             message:'Section created successfully',
-            updateCourseDetails,
+            updateCourse,
         })
     }
     catch(error) {
@@ -58,7 +63,7 @@ exports.updateSection = async(req, res) => {
         //return res
         return res.status(200).json({
             success:true,
-            message:'SEction Updated Successfully',
+            message:section,
         });
     }
     catch(error) {

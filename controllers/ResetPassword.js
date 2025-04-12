@@ -19,16 +19,17 @@ exports.resetPasswordToken = async(req, res) => {
         }
 
         //generate token
-        const token = crypto.randomUUID();
+        const token = crypto.randomBytes(20).toString("hex");
         //update user by adding token and expiration time
         const updatedDetails = await User.findOneAndUpdate (
             {email:email},
             { 
                 token:token,
-                resetPasswordExpires: Date.now() + 5*60*1000,
+                resetPasswordExpires: Date.now() + 3600000,
             },
             {new:true}
         );
+        console.log("DETAILS", updatedDetails);
 
         //create url
         const url = `http://localhost:3000/update-password/${token}`
@@ -79,7 +80,7 @@ exports.resetPassword = async (req, res) => {
         }
 
         //token time check
-        if(userDetails.resetPasswordExpires < Date.now()) {
+        if(userDetails.resetPasswordExpires > Date.now()) {
             return res.json({
                 success:false,
                 message:'Token is expired, please regenerate your token',
