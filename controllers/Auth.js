@@ -33,11 +33,11 @@ exports.sendotp = async(req, res) => {
             lowerCaseAlphabets:false,
             specialChars:false,
         });
-        console.log("OTP generated: ", OTP );
-
+        
         //check unique otp or not
         let result = await OTP.findOne({otp: otp});
-
+        console.log("OTP generated: ", OTP );
+        console.log("Result", result);
         while(result) {
             otp = otpGenerator(6, {
                 upperCaseAlphabets:false,
@@ -75,10 +75,24 @@ exports.signup = async (req, res) => {
     try {
 
         //data fetch from request body
-        const { firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp } = req.body;
+        const { 
+            firstName, 
+            lastName, 
+            email, 
+            password, 
+            confirmPassword, 
+            accountType, 
+            contactNumber, 
+            otp } = req.body;
 
         //validation
-        if(!firstName || !lastName || !email || !password || !confirmPassword || !otp ) {
+        if(
+            !firstName || 
+            !lastName || 
+            !email || 
+            !password || 
+            !confirmPassword || 
+            !otp ) {
             return res.status(403).json({
                 success:false,
                 message:"All fields are required",
@@ -111,9 +125,9 @@ exports.signup = async (req, res) => {
             //OTP not found
             return res.status(400).json({
                 success:false,
-                message:'OTP Found',
+                message:'The OTP is not valid',
             })
-        } else if(otp !== recentOtp) {
+        } else if(otp !== recentOtp[0].otp) {
             //Invalid OTP
             return res.status(400).json({
                 success:false,
@@ -123,6 +137,10 @@ exports.signup = async (req, res) => {
 
         //Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create the user
+		let approved = "";
+		approved === "Instructor" ? (approved = false) : (approved = true);
 
         //entry create in DB
 
@@ -139,9 +157,9 @@ exports.signup = async (req, res) => {
             email,
             contactNumber,
             password:hashedPassword,
-            accountType,
+            accountType: accountType,
             additionalDetails:profileDetails._id,
-            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstname} ${lastName}`,
+            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
         })
 
         return res.status(200).json({
@@ -196,7 +214,7 @@ exports.login = async (req, res) => {
 
             //create cookie and send response
             const options = {
-                expires: new Date(Date.now() + 3*24*60*60*1000),
+                expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
                 httpOnly:true,
             }
             res.cookie("token", token, options).status(200).json({
