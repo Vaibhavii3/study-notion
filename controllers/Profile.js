@@ -23,11 +23,11 @@ exports.updateProfile = async(req, res) => {
         
 
         //update profile
-        profileDetails.dateOfBirth = dateOfBirth;
-        profileDetails.about = about;
-        profileDetails.gender = gender;
-        profileDetails.contactNumber = contactNumber;
-        await profileDetails.save();
+        profileId.dateOfBirth = dateOfBirth;
+        profileId.about = about;
+        profileId.gender = gender;
+        profileId.contactNumber = contactNumber;
+        await profileId.save();
 
         return res.status(200).json({
             success:true,
