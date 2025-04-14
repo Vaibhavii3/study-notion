@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const userRoutes = require("./routes/User");
+const userRoutes = require("./routes/User")
 const paymentRoutes = require("./routes/Profile")
 const profileRoutes = require("./routes/Profile")
 const courseRoutes = require("./routes/Course")
