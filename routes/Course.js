@@ -63,7 +63,7 @@ const {
 
 const {
   createSubSection,
-  updateSubSection,
+  updatedSubSection,
   deleteSubSection,
 } = require("../controllers/SubSection");
 
@@ -86,8 +86,9 @@ router.post("/createCourse", auth, isInstructor, createCourse);
 router.post("/addSection", auth, isInstructor, createSection);
 router.post("/updateSection", auth, isInstructor, updateSection);
 router.post("/deleteSection", auth, isInstructor, deleteSection);
+
 router.post("/addSubSection", auth, isInstructor, createSubSection);
-router.post("/updateSubSection", auth, isInstructor, updateSubSection);
+router.post("/updatedSubSection", auth, isInstructor, updatedSubSection);
 router.post("/deleteSubSection", auth, isInstructor, deleteSubSection);
 router.get("/getAllCourses", getAllCourses);
 router.post("/getCoursesDetails", getCoursesDetails);
