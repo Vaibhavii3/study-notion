@@ -29,7 +29,7 @@ const Footer = () => {
             
                 <div className="border-b w-[100%] flex flex-col lg:flex-row pb-5 border-richblack-700">
                     {/* section 1 */}
-                    <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr5 gap-3">
+                    <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
                         <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
                             <img src={Logo} alt="" className="object-contain" />
                             <h1 className="text-richblack-50 font-semibold text-[16px]">
@@ -129,20 +129,16 @@ const Footer = () => {
                                     <div className="flex flex-col gap-2 mt-2">
                                         {ele.links.map((link, index) => {
                                             return (
-                                                <div className="flex flex-col gap-2 mt-2">
-                                                    {ele.links.map((link, index) => {
-                                                        return (
-                                                            <div key={index} className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200">
-                                                                <Link to={link.link}>{link.title}</Link>
-                                                            </div>
-                                                        );
-                                                    })}
+                                                <div
+                                                key={index}
+                                                className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200">
+                                                    <Link to={link.link}>{link.title}</Link>
                                                 </div>
                                             );
                                         })}
                                     </div>    
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 </div>

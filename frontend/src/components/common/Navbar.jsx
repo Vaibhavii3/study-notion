@@ -58,7 +58,7 @@ const Navbar = () => {
                 </Link>
 
                 <nav>
-                    <ul className="flex gap-x-6 text-richblack-25">
+                    <ul className="flex gap-x-6 text-richblack-25 p-4">
                         { 
                             NavbarLinks.map((link, index) => (
                                 <li key={index}>
@@ -73,9 +73,9 @@ const Navbar = () => {
                                                     </div>
                                                     {
                                                         subLinks.length ? (
-                                                            subLinks.map((subLinks, index) => (
-                                                                <Link to={`${subLinks.link}`} key={index}>
-                                                                    <p>{subLinks.title}</p>
+                                                            subLinks.map((subLink, index) => (
+                                                                <Link to={`${subLink.link}`} key={index}>
+                                                                    <p>{subLink.title}</p>
                                                                 </Link>
                                                             ))
                                                         ) : (<div></div>)

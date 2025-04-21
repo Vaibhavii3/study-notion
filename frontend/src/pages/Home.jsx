@@ -148,10 +148,12 @@ const Home = () => {
                 </div>
 
                 <div className='mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7'>
+                <div className='flex flex-row gap-5 mb-10 mt-[95px]'>
                     <div className='flex flex-row gap-5 mb-10 mt-[45%]'>
                         Get the Skills you need for a
                         <HighlightText text={"Job that is in demand"} />
                     </div>
+
 
                     <div className='flex flex-col gap-10 w-[40%] items-start'>
                         <div className='text-[16px]'>
@@ -164,12 +166,15 @@ const Home = () => {
                         </CTAButton>
                     </div>
 
-                </div>
+                    </div>
+
 
                 <TimelineSection />
 
                 <LearningLanguageSection />
             </div>
+            
+        </div>
 
              {/* section 3 */}
 
