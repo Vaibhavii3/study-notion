@@ -4,15 +4,15 @@ import { setLoading, setToken } from "../../slices/authSlice"
 import { resetCart } from "../../slices/cartSlice"
 import { setUser } from "../../slices/profileSlice"
 import { apiConnector } from "../apiconnector"
-import { endpointes } from "../apis"
+import { endpoints } from "../apis"
 
 const {
     SENDOTP_API,
     SIGNUP_API,
     LOGIN_API,
     RESETPASSTOKEN_API,
-    RESETPASSWORD_API
-} = endpointes
+    RESETPASSWORD_API,
+} = endpoints
 
 export function sendOtp(email, navigate) {
     return async (dispatch) => {
@@ -147,10 +147,10 @@ export function resetPassword (password, confirmPassword, token, navigate) {
         const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
-            const response = await apiConnector("POST", RESETPASSTOKEN_API, {
+            const response = await apiConnector("POST", RESETPASSWORD_API, {
                 password,
                 confirmPassword,
-                token
+                token,
             })
 
             console.log("RESETPASSWORD RESPONSE............", response)
