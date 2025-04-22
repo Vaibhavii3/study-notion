@@ -101,7 +101,7 @@ export function login(email, password, navigate) {
 
             toast.success("Login Successful")
             dispatch(setToken(response.data.token))
-            const userImage = response.data?.user?.userImage
+            const userImage = response.data?.user?.image
             ? response.data.user.image
             : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`
             dispatch(setUser({ ...response.data.user, image: userImage }))
@@ -118,7 +118,7 @@ export function login(email, password, navigate) {
 
 export function getPasswordResetToken(email, setEmailSent) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...")
+        // const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST", RESETPASSTOKEN_API, {
@@ -137,14 +137,14 @@ export function getPasswordResetToken(email, setEmailSent) {
             console.log("RESETPASSTOKEN ERROR............", error)
             toast.error("Failed To Send Reset Email")
         }
-        toast.dismiss(toastId)
+        // toast.dismiss(toastId)
         dispatch(setLoading(false))
     }
 }
 
-export function resetPassword (password, confirmPassword, token, navigate) {
+export function resetPassword (password, confirmPassword, token ) {
     return async (dispatch) => {
-        const toastId = toast.loading("Loading...")
+        // const toastId = toast.loading("Loading...")
         dispatch(setLoading(true))
         try {
             const response = await apiConnector("POST", RESETPASSWORD_API, {
@@ -160,12 +160,12 @@ export function resetPassword (password, confirmPassword, token, navigate) {
         }
 
         toast.success("Password Reset Successfully")
-        navigate("/login")
+        // navigate("/login")
         } catch (error) {
             console.log("RESETPASSWORD ERROR............", error)
             toast.error("Failed To Reset Password")
         }
-        toast.dismiss(toastId)
+        // toast.dismiss(toastId)
         dispatch(setLoading(false))
     }
 }
