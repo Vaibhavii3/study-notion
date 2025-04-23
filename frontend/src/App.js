@@ -3,12 +3,15 @@ import {Route, Routes } from "react-router-dom";
 import Home from "./pages/Home"
 import Navbar from "./components/common/Navbar"
 import Login from "./pages/Login"
+
 import Signup from "./pages/Signup"
 import OpenRoute from "./components/core/Auth/OpenRoute"
 import ForgotPassword from "./pages/ForgotPassword"
 import VerifyEmail from "./pages/VerifyEmail"
 import UpdatePassword from "./pages/UpdatePassword"
 import About from "./pages/About"
+import Contact from "./pages/Contact"
+import Error from "./pages/Error"
 
 function App() {
   return (
@@ -59,8 +62,15 @@ function App() {
       }
       />
 
+      <Route path="/contact" element={
+        <Contact />
+      }
+      />
+
+      <Route path="*" element={<Error />} />
+
     </Routes>
-   </div>
+  </div>
   );
 }
 
